@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowthUGC — We Help You Grow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #07091f;
+      --navy-2:     #0c0f2e;
+      --navy-3:     #111540;
+      --navy-4:     #181d52;
+      --blue:       #3d5af1;
+      --blue-2:     #5b78ff;
+      --purple:     #7b5ea7;
+      --cyan:       #2ec4f3;
+      --grad:       linear-gradient(135deg, #3d5af1 0%, #7b5ea7 55%, #2ec4f3 100%);
+      --grad-text:  linear-gradient(120deg, #7b9fff 0%, #c084fc 50%, #67e8f9 100%);
+      --white:      #ffffff;
+      --w80:        rgba(255,255,255,0.8);
+      --w55:        rgba(255,255,255,0.55);
+      --w30:        rgba(255,255,255,0.3);
+      --w10:        rgba(255,255,255,0.07);
+      --w06:        rgba(255,255,255,0.04);
+      --border:     rgba(255,255,255,0.09);
+      --border-2:   rgba(255,255,255,0.15);
+      --green:      #1fd97a;
+      --red:        #ff5757;
+      --glow:       rgba(61,90,241,0.3);
+      --display:    'Playfair Display', Georgia, serif;
+      --body:       'Outfit', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── UTILITIES ── */
+    .grad-text {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ══════════════════════════════════════
+       LANGUAGE BAR
+    ══════════════════════════════════════ */
+    .lang-bar {
+      background: var(--navy-2);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+    }
+    .lang-bar-inner {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+    }
+    .lang-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--w55);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--w55);
+      font-family: var(--body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 5px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-btn.active {
+      background: var(--grad);
+      border-color: transparent;
+      color: var(--white);
+    }
+    .lang-btn:hover:not(.active) { border-color: var(--w30); color: var(--white); }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 0;
+      background: rgba(7,9,31,0.95);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .logo {
+      font-family: var(--body);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 34px; height: 34px;
+      flex-shrink: 0;
+    }
+    .logo-text { color: var(--white); }
+    .logo-text .ugc { color: var(--blue-2); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--w55);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--blue-2);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .nav-links a:not(.nav-cta):hover { color: var(--white); }
+    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      background: var(--grad) !important;
+      color: var(--white) !important;
+      padding: 10px 24px !important;
+      border-radius: 6px !important;
+      font-size: 0.84rem !important;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 20px var(--glow);
+      transition: opacity 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .hero {
+      position: relative;
+      padding: 120px 0 100px;
+      overflow: hidden;
+    }
+
+    /* Mesh background */
+    .hero-mesh {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-mesh::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: -200px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61,90,241,0.15) 0%, transparent 65%);
+    }
+    .hero-mesh::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,94,167,0.12) 0%, transparent 65%);
+    }
+
+    /* Grid lines decoration */
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border-2);
+      background: var(--w06);
+      color: var(--blue-2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+    }
+    .hero-tag-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 26px;
+    }
+    .hero h1 .line-2 {
+      display: block;
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--w55);
+      font-weight: 300;
+      max-width: 460px;
+      margin-bottom: 44px;
+      line-height: 1.8;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .btn-primary {
+      background: var(--grad);
+      color: var(--white);
+      padding: 15px 32px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-family: var(--body);
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s, transform 0.15s;
+      box-shadow: 0 4px 28px var(--glow);
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--w80);
+      padding: 15px 28px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid var(--border-2);
+      cursor: pointer;
+      font-family: var(--body);
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { border-color: var(--blue-2); color: var(--white); transform: translateY(-2px); }
+
+    .hero-meta {
+      display: flex;
+      gap: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .meta-item {}
+    .meta-num {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .meta-label { font-size: 0.78rem; color: var(--w55); font-weight: 400; }
+
+    /* Hero Card */
+    .hero-card {
+      background: var(--navy-2);
+      border: 1px solid var(--border-2);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+      animation: float 6s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0px) rotate(0.3deg); }
+      50%      { transform: translateY(-12px) rotate(-0.3deg); }
+    }
+    .hc-header {
+      background: var(--grad);
+      padding: 28px 32px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hc-header::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+    }
+    .hc-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 8px;
+    }
+    .hc-header h4 {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .hc-header p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+
+    .hc-body { padding: 4px 0; }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 32px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-label { color: var(--w55); font-weight: 400; }
+    .stat-val { font-weight: 600; }
+    .stat-val.green { color: var(--green); }
+    .stat-val.pill {
+      background: rgba(61,90,241,0.18);
+      color: var(--blue-2);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+    .hc-footer {
+      background: var(--navy-3);
+      border-top: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: var(--w55);
+    }
+    .live-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow: 0 0 0 0 rgba(31,217,122,0.5); }
+      50% { box-shadow: 0 0 0 6px rgba(31,217,122,0); }
+    }
+
+    /* ══════════════════════════════════════
+       STATS STRIP
+    ══════════════════════════════════════ */
+    .stats-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--navy-2);
+      padding: 0;
+    }
+    .stats-strip-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .strip-stat {
+      padding: 40px 32px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .strip-stat:last-child { border-right: none; }
+    .strip-stat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--grad);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    .strip-stat:hover::before { transform: scaleX(1); }
+    .strip-num {
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .strip-label {
+      font-size: 0.82rem;
+      color: var(--w55);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* ══════════════════════════════════════
+       SECTION SHARED
+    ══════════════════════════════════════ */
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue-2);
+      margin-bottom: 16px;
+    }
+    .section-kicker::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--blue-2);
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-size: 1rem;
+      color: var(--w55);
+      font-weight: 300;
+      max-width: 520px;
+      line-height: 1.85;
+      margin-bottom: 60px;
+    }
+
+    /* ══════════════════════════════════════
+       PROBLEM / SOLUTION
+    ══════════════════════════════════════ */
+    .ps-section {
+      padding: 110px 0;
+      background: var(--navy);
+    }
+    .ps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .ps-box {
+      border-radius: 12px;
+      padding: 44px;
+      border: 1px solid var(--border);
+      background: var(--navy-2);
+      position: relative;
+      overflow: hidden;
+    }
+    .ps-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .ps-box.problem::before { background: var(--red); }
+    .ps-box.solution::before { background: var(--green); }
+
+    .ps-box-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ps-box.problem .ps-box-label { color: var(--red); }
+    .ps-box.solution .ps-box-label { color: var(--green); }
+
+    .ps-list { list-style: none; }
+    .ps-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+      color: var(--w55);
+      line-height: 1.55;
+    }
+    .ps-list li:last-child { border-bottom: none; }
+    .ps-ico { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+
+    /* ══════════════════════════════════════
+       PROCESS
+    ══════════════════════════════════════ */
+    .process-section {
+      padding: 110px 0;
+      background: var(--navy-2);
+      position: relative;
+      overflow: hidden;
+    }
+    .process-section::before {
+      content: '';
+      position: absolute;
+      right: -200px; top: 50%;
+      transform: translateY(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61,90,241,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .process-step {
+      background: var(--navy-2);
+      padding: 40px 32px;
+      transition: background 0.3s;
+      position: relative;
+    }
+    .process-step:hover { background: var(--navy-3); }
+    .step-number {
+      font-family: var(--display);
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 20px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.4;
+    }
+    .step-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--white);
+      letter-spacing: -0.2px;
+    }
+    .step-desc {
+      font-size: 0.84rem;
+      color: var(--w55);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════════
+       CREATORS
+    ══════════════════════════════════════ */
+    .creators-section {
+      padding: 110px 0;
+      background: var(--navy);
+    }
+    .creators-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .perks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .perk {
+      background: var(--navy-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .perk:hover { border-color: var(--blue); transform: translateY(-3px); }
+    .perk-icon { font-size: 1.3rem; margin-bottom: 12px; }
+    .perk-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--white);
+      letter-spacing: -0.2px;
+    }
+    .perk-desc { font-size: 0.78rem; color: var(--w55); font-weight: 300; line-height: 1.6; }
+
+    .reqs-card {
+      background: var(--navy-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .reqs-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--border);
+      background: var(--navy-3);
+    }
+    .reqs-header h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--w55);
+    }
+    .reqs-list { list-style: none; }
+    .reqs-list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--w80);
+      font-weight: 400;
+    }
+    .reqs-list li:last-child { border-bottom: none; }
+    .req-icon {
+      width: 36px; height: 36px;
+      background: rgba(61,90,241,0.12);
+      border: 1px solid rgba(61,90,241,0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .reqs-footer {
+      padding: 20px 32px;
+      background: rgba(61,90,241,0.07);
+      border-top: 1px solid rgba(61,90,241,0.2);
+      font-size: 0.82rem;
+      color: var(--blue-2);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ══════════════════════════════════════
+       FORMS
+    ══════════════════════════════════════ */
+    .forms-section {
+      padding: 110px 0;
+      background: var(--navy-2);
+    }
+    .forms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .form-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .form-card-header {
+      padding: 32px 40px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .form-card.brand .form-card-header { background: var(--grad); }
+    .form-card.creator .form-card-header { background: var(--navy-3); }
+
+    .form-card-header h3 {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--white);
+    }
+    .form-card-header p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+    }
+    .form-body {
+      padding: 32px 40px 40px;
+      background: var(--navy-2);
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 0.71rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--w55);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: var(--body);
+      outline: none;
+      background: var(--navy-3);
+      border: 1px solid var(--border-2);
+      color: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--blue-2);
+      box-shadow: 0 0 0 3px rgba(61,90,241,0.15);
+    }
+    .form-group select option { background: var(--navy-2); }
+    .form-submit {
+      width: 100%;
+      margin-top: 8px;
+      padding: 15px 32px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--body);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .form-card.brand .form-submit {
+      background: var(--grad);
+      color: var(--white);
+      box-shadow: 0 4px 20px var(--glow);
+    }
+    .form-card.creator .form-submit {
+      background: var(--navy-4);
+      color: var(--white);
+      border: 1px solid var(--border-2);
+    }
+    .form-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      background: var(--navy-2);
+      border-top: 1px solid var(--border);
+      padding: 72px 0 36px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+    .footer-brand p {
+      font-size: 0.84rem;
+      color: var(--w55);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-top: 16px;
+    }
+    .footer-col h5 {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--w55);
+      margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li {
+      margin-bottom: 12px;
+      font-size: 0.875rem;
+      color: var(--w55);
+      font-weight: 300;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .footer-col li:hover { color: var(--white); }
+    .footer-col a { color: var(--w55); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--w55);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+    .footer-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 1000px) {
+      .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 860px) {
+      .hero-inner, .ps-grid, .creators-inner, .forms-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .stats-strip-inner { grid-template-columns: 1fr 1fr; }
+      .strip-stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .strip-stat:nth-child(2n) { border-right: none; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .process-steps { grid-template-columns: 1fr; }
+      .perks { grid-template-columns: 1fr; }
+      .hero { padding: 80px 0 60px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .container { padding: 0 24px; }
+    }
+
+    /* ══════════════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-copy > * { animation: fadeUp 0.7s cubic-bezier(.22,.68,0,1.2) both; }
+    .hero-copy > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-copy > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero-copy > *:nth-child(3) { animation-delay: 0.25s; }
+    .hero-copy > *:nth-child(4) { animation-delay: 0.38s; }
+    .hero-copy > *:nth-child(5) { animation-delay: 0.5s; }
+    .hero-card-wrap { animation: fadeUp 0.8s cubic-bezier(.22,.68,0,1.2) 0.3s both; }
+  </style>
+</head>
+<body>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <div class="container lang-bar-inner">
+    <span class="lang-label">Language</span>
+    <button class="lang-btn" id="btn-sv" onclick="setLang('sv')">🇸🇪 Svenska</button>
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#3d5af1"/>
+            <stop offset="55%" stop-color="#7b5ea7"/>
+            <stop offset="100%" stop-color="#2ec4f3"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 4 L92 28 L92 72 L50 96 L8 72 L8 28 Z" fill="url(#g1)"/>
+        <path d="M40 33 L70 50 L40 67 Z" fill="white" opacity="0.95"/>
+        <rect x="32" y="33" width="5" height="34" rx="2.5" fill="white" opacity="0.65"/>
+      </svg>
+      <span class="logo-text">Growth<span class="ugc">UGC</span></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#process" data-sv="Hur det fungerar" data-en="How It Works">How It Works</a></li>
+      <li><a href="#creators" data-sv="För creators" data-en="For Creators">For Creators</a></li>
+      <li><a href="#brands" data-sv="För varumärken" data-en="For Brands">For Brands</a></li>
+      <li><a href="#apply" class="nav-cta" data-sv="Kom igång" data-en="Get Started">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        <span data-sv="UGC-byrå · Lanseras i Sverige" data-en="UGC Agency · Now Launching in Sweden">UGC Agency · Now Launching in Sweden</span>
+      </div>
+      <h1>
+        <span data-sv="Vi hjälper ditt" data-en="We Help Your">We Help Your</span>
+        <span class="line-2 grad-text" data-sv="företag att växa." data-en="Business Grow.">Business Grow.</span>
+      </h1>
+      <p class="hero-desc" data-sv="Vi matchar varumärken med verifierade creators som producerar innehåll som faktiskt konverterar till försäljning — levererat inom 48–72 timmar." data-en="We match brands with verified creators who produce content that actually converts into sales — delivered within 48–72 hours.">We match brands with verified creators who produce content that actually converts into sales — delivered within 48–72 hours.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})"
+          data-sv="Matcha mig med creators →" data-en="Get Matched with Creators →">Get Matched with Creators →</button>
+        <button class="btn-outline" onclick="document.getElementById('creators').scrollIntoView({behavior:'smooth'})"
+          data-sv="Ansök som creator" data-en="Apply as a Creator">Apply as a Creator</button>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <div class="meta-num grad-text">48h</div>
+          <div class="meta-label" data-sv="Garanterad matchning" data-en="Guaranteed match">Guaranteed match</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-num grad-text">3.4×</div>
+          <div class="meta-label" data-sv="Genomsnittlig ROAS" data-en="Average ROAS lift">Average ROAS lift</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-num grad-text">100%</div>
+          <div class="meta-label" data-sv="Skönhetsfokus" data-en="Beauty focused">Beauty focused</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card-wrap">
+      <div class="hero-card">
+        <div class="hc-header">
+          <div class="hc-eyebrow" data-sv="Matchad creator" data-en="Matched Creator">Matched Creator</div>
+          <h4>@skincarebyella</h4>
+          <p data-sv="Clean Beauty · Anti-Aging · Hudvård" data-en="Clean Beauty · Anti-Aging · Skincare">Clean Beauty · Anti-Aging · Skincare</p>
+        </div>
+        <div class="hc-body">
+          <div class="stat-row">
+            <span class="stat-label" data-sv="Plattform" data-en="Platform">Platform</span>
+            <span class="stat-val pill">TikTok · Instagram</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label" data-sv="Leverans" data-en="Delivery">Delivery</span>
+            <span class="stat-val" data-sv="6 videos · 5 dagar" data-en="6 videos · 5 days">6 videos · 5 days</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">ROAS</span>
+            <span class="stat-val green">↑ 3.4× vs. studio ads</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label" data-sv="Status" data-en="Status">Status</span>
+            <span class="stat-val green" data-sv="✓ Levererad" data-en="✓ Delivered">✓ Delivered</span>
+          </div>
+        </div>
+        <div class="hc-footer">
+          <span class="live-dot"></span>
+          <span data-sv="8 creators matchade denna vecka" data-en="8 creators matched this week">8 creators matched this week</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-strip-inner">
+      <div class="strip-stat">
+        <div class="strip-num">48h</div>
+        <div class="strip-label" data-sv="Garanterad matchning" data-en="Guaranteed creator match">Guaranteed creator match</div>
+      </div>
+      <div class="strip-stat">
+        <div class="strip-num">3.4×</div>
+        <div class="strip-label" data-sv="Genomsnittlig ROAS-ökning" data-en="Average ROAS increase vs. studio ads">Average ROAS increase vs. studio ads</div>
+      </div>
+      <div class="strip-stat">
+        <div class="strip-num">100%</div>
+        <div class="strip-label" data-sv="Fokus på skönhetsnischen" data-en="Focus on the beauty niche">Focus on the beauty niche</div>
+      </div>
+      <div class="strip-stat">
+        <div class="strip-num">0 kr</div>
+        <div class="strip-label" data-sv="Byråavgift för creators" data-en="Agency fee for creators">Agency fee for creators</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM → SOLUTION -->
+<section class="ps-section">
+  <div class="container">
+    <div class="section-kicker" data-sv="Problemet & lösningen" data-en="The Problem & The Solution">The Problem & The Solution</div>
+    <h2 class="section-title" data-sv="Varför fungerar inte annonser längre?" data-en="Why Don't Traditional Ads Work Anymore?">Why Don't Traditional Ads Work Anymore?</h2>
+    <p class="section-body" data-sv="Konsumenter ignorerar traditionell reklam. De litar på riktiga människor — och UGC är det enda annonsformatet som faktiskt konverterar 2026. Vi ser till att ditt varumärke utnyttjar det." data-en="Consumers ignore traditional ads. They trust real people — and UGC is the only ad format that actually converts in 2026. We make sure your brand leverages it.">Consumers ignore traditional ads. They trust real people — and UGC is the only ad format that actually converts in 2026. We make sure your brand leverages it.</p>
+    <div class="ps-grid">
+      <div class="ps-box problem">
+        <div class="ps-box-label" data-sv="✗ Gamla sättet" data-en="✗ The Old Way">✗ The Old Way</div>
+        <ul class="ps-list">
+          <li><span class="ps-ico">⏳</span><span data-sv="Veckor lade på att hitta rätt creators själv" data-en="Weeks spent searching for creators yourself">Weeks spent searching for creators yourself</span></li>
+          <li><span class="ps-ico">💸</span><span data-sv="Dyra studioproduktioner — låg autenticitet" data-en="Expensive studio productions with low authenticity">Expensive studio productions with low authenticity</span></li>
+          <li><span class="ps-ico">🎲</span><span data-sv="Ingen kvalitetskontroll, inkonsekvent leverans" data-en="No quality control, inconsistent delivery">No quality control, inconsistent delivery</span></li>
+          <li><span class="ps-ico">📉</span><span data-sv="Generiska annonser som konsumenter skrollar förbi" data-en="Generic ads consumers scroll straight past">Generic ads consumers scroll straight past</span></li>
+          <li><span class="ps-ico">🔁</span><span data-sv="Ändlösa revisionsrundor och missade deadlines" data-en="Endless revision rounds and missed deadlines">Endless revision rounds and missed deadlines</span></li>
+          <li><span class="ps-ico">📊</span><span data-sv="Ingen data på vad som faktiskt konverterar" data-en="No insight into what actually drives conversions">No insight into what actually drives conversions</span></li>
+        </ul>
+      </div>
+      <div class="ps-box solution">
+        <div class="ps-box-label" data-sv="✓ GrowthUGC-sättet" data-en="✓ The GrowthUGC Way">✓ The GrowthUGC Way</div>
+        <ul class="ps-list">
+          <li><span class="ps-ico">⚡</span><span data-sv="Vi matchar dig med verifierade creators inom 48h" data-en="We match you with verified creators within 48h">We match you with verified creators within 48h</span></li>
+          <li><span class="ps-ico">🎬</span><span data-sv="Autentiskt innehåll som sticker ut i flödet" data-en="Authentic content that stops the scroll">Authentic content that stops the scroll</span></li>
+          <li><span class="ps-ico">✅</span><span data-sv="Varje creator är testad och nischkvalificerad" data-en="Every creator is vetted and niche-qualified">Every creator is vetted and niche-qualified</span></li>
+          <li><span class="ps-ico">📈</span><span data-sv="Innehåll byggt för ROAS — inte bara estetik" data-en="Content engineered for ROAS, not just aesthetics">Content engineered for ROAS, not just aesthetics</span></li>
+          <li><span class="ps-ico">🗓</span><span data-sv="Strukturerat briefsystem och leverans i tid" data-en="Structured brief system with on-time delivery">Structured brief system with on-time delivery</span></li>
+          <li><span class="ps-ico">📡</span><span data-sv="Vi hanterar allt — du fokuserar på tillväxten" data-en="We handle everything — you focus on growth">We handle everything — you focus on growth</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-kicker" data-sv="Processen" data-en="The Process">The Process</div>
+    <h2 class="section-title" data-sv="Från brief till färdigt innehåll på fyra steg" data-en="Four Steps from Brief to Ready Content">Four Steps from Brief to Ready Content</h2>
+    <p class="section-body" data-sv="Vi hanterar hela processen. Du spenderar inte en enda minut på att jaga creators." data-en="We manage the entire process. You don't spend a single minute chasing creators or following up.">We manage the entire process. You don't spend a single minute chasing creators or following up.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-number">01</div>
+        <div class="step-title" data-sv="Skicka din förfrågan" data-en="Submit Your Request">Submit Your Request</div>
+        <div class="step-desc" data-sv="Berätta om ditt varumärke och mål. Tar under 5 minuter." data-en="Tell us about your brand, product, and goal. Takes under 5 minutes.">Tell us about your brand, product, and goal. Takes under 5 minutes.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">02</div>
+        <div class="step-title" data-sv="Vi kontaktar dig inom 24h" data-en="We Contact You in 24h">We Contact You in 24h</div>
+        <div class="step-desc" data-sv="Vårt team återkommer med en plan och prissättning." data-en="Our team responds with a tailored plan and pricing — guaranteed within 24 hours.">Our team responds with a tailored plan and pricing — guaranteed within 24 hours.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">03</div>
+        <div class="step-title" data-sv="Vi matchar dig med creators" data-en="We Match You with Creators">We Match You with Creators</div>
+        <div class="step-desc" data-sv="Vi handplockar verifierade creators i din nisch och briefar dem." data-en="We handpick verified creators in your exact niche and brief them on your behalf.">We handpick verified creators in your exact niche and brief them on your behalf.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">04</div>
+        <div class="step-title" data-sv="Ta emot och publicera" data-en="Receive and Launch">Receive and Launch</div>
+        <div class="step-desc" data-sv="Godkänn innehållet, få nyttjanderätten och kör direkt." data-en="Approve your content, receive full usage rights, and go live as ads or organic.">Approve your content, receive full usage rights, and go live as ads or organic.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREATORS -->
+<section class="creators-section" id="creators">
+  <div class="container creators-inner">
+    <div>
+      <div class="section-kicker" data-sv="För creators" data-en="For Creators">For Creators</div>
+      <h2 class="section-title" data-sv="Tjäna pengar på innehåll du älskar." data-en="Get Paid for Content You Love Creating.">Get Paid for Content You <span class="grad-text">Love</span> Creating.</h2>
+      <p class="section-body" data-sv="Inga krav på följarantal. Vi bryr oss om kvalitet — inte storlek. Gå med i vårt nätverk och ta emot betalda uppdrag från premium skönhetsmärken." data-en="No minimum follower count required. We care about content quality, not audience size. Join our vetted network and receive paid briefs from premium beauty brands.">No minimum follower count required. We care about content quality, not audience size. Join our vetted network and receive paid briefs from premium beauty brands.</p>
+      <div class="perks">
+        <div class="perk">
+          <div class="perk-icon">💰</div>
+          <div class="perk-title" data-sv="Betalt per uppdrag" data-en="Paid Per Brief">Paid Per Brief</div>
+          <div class="perk-desc" data-sv="Tydlig prissättning baserat på din erfarenhet" data-en="Transparent pricing based on your experience level">Transparent pricing based on your experience level</div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">🚀</div>
+          <div class="perk-title" data-sv="Bygg din portfölj" data-en="Build Your Portfolio">Build Your Portfolio</div>
+          <div class="perk-desc" data-sv="Samarbeta med riktiga varumärken från dag ett" data-en="Work with real brands and grow your professional portfolio">Work with real brands and grow your professional portfolio</div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">🎁</div>
+          <div class="perk-title" data-sv="Gratis produkter" data-en="Free Products">Free Products</div>
+          <div class="perk-desc" data-sv="Ta emot och testa skönhetsprodukter du gillar" data-en="Receive and review beauty products you actually love">Receive and review beauty products you actually love</div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">🌍</div>
+          <div class="perk-title" data-sv="Väx med oss" data-en="Grow With Us">Grow With Us</div>
+          <div class="perk-desc" data-sv="Vi expanderar i Sverige och sedan hela Europa" data-en="Launching in Sweden, expanding across Europe">Launching in Sweden, expanding across Europe</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})"
+        data-sv="Ansök som creator →" data-en="Apply as a Creator →">Apply as a Creator →</button>
+    </div>
+
+    <div>
+      <div class="reqs-card">
+        <div class="reqs-header">
+          <h4 data-sv="Krav för creators" data-en="Creator Requirements">Creator Requirements</h4>
+        </div>
+        <ul class="reqs-list">
+          <li><span class="req-icon">👥</span><span data-sv="Minst 1 000 följare på TikTok eller Instagram" data-en="Minimum 1,000 followers on TikTok or Instagram">Minimum 1,000 followers on TikTok or Instagram</span></li>
+          <li><span class="req-icon">💄</span><span data-sv="Aktiv inom skönhet, hudvård eller wellness" data-en="Active in the beauty, skincare, or wellness space">Active in the beauty, skincare, or wellness space</span></li>
+          <li><span class="req-icon">🎥</span><span data-sv="Portfölj med befintligt innehåll (obligatoriskt)" data-en="Portfolio of existing content (required)">Portfolio of existing content (required)</span></li>
+          <li><span class="req-icon">📦</span><span data-sv="Möjlighet att ta emot och recensera PR-produkter" data-en="Ability to receive and review PR products">Ability to receive and review PR products</span></li>
+          <li><span class="req-icon">⏰</span><span data-sv="Kan hålla överenskomna deadlines" data-en="Reliable delivery within agreed timelines">Reliable delivery within agreed timelines</span></li>
+          <li><span class="req-icon">📍</span><span data-sv="Baserad i Sverige (expansion till Europa pågår)" data-en="Based in Sweden (European expansion underway)">Based in Sweden (European expansion underway)</span></li>
+        </ul>
+        <div class="reqs-footer">⚠ <span data-sv="Begränsat antal platser under betatesten — ansök nu." data-en="Limited spots available during beta — apply now to secure your place.">Limited spots available during beta — apply now to secure your place.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMS -->
+<section class="forms-section" id="apply">
+  <div class="container">
+    <div class="section-kicker" data-sv="Kom igång" data-en="Get Started">Get Started</div>
+    <h2 class="section-title" data-sv="Redo att växa?" data-en="Ready to Grow?">Ready to Grow?</h2>
+    <p class="section-body" data-sv="Oavsett om du är ett varumärke eller en creator — vi vill höra från dig." data-en="Whether you're a brand ready to scale your content or a creator ready to get paid — we want to hear from you.">Whether you're a brand ready to scale your content or a creator ready to get paid — we want to hear from you.</p>
+    <div class="forms-grid" id="brands">
+
+      <div class="form-card brand">
+        <div class="form-card-header">
+          <h3 data-sv="För varumärken" data-en="For Brands">For Brands</h3>
+          <p data-sv="Vi återkommer inom 24h med en skräddarsydd plan." data-en="We'll get back to you within 24h with a tailored plan.">We'll get back to you within 24h with a tailored plan.</p>
+        </div>
+        <div class="form-body">
+          <div class="form-group">
+            <label data-sv="Varumärkesnamn" data-en="Brand Name">Brand Name</label>
+            <input type="text" data-sv-placeholder="ex. Glow Lab Beauty" data-en-placeholder="e.g. Glow Lab Beauty" placeholder="e.g. Glow Lab Beauty" />
+          </div>
+          <div class="form-group">
+            <label data-sv="E-postadress" data-en="Email Address">Email Address</label>
+            <input type="email" data-sv-placeholder="du@varumärke.se" data-en-placeholder="you@brand.com" placeholder="you@brand.com" />
+          </div>
+          <div class="form-group">
+            <label data-sv="När behöver du innehåll?" data-en="When Do You Need Content?">When Do You Need Content?</label>
+            <select>
+              <option value="" data-sv="Välj tidsram..." data-en="Select a timeline...">Select a timeline...</option>
+              <option data-sv="Inom 1 vecka" data-en="Within 1 week">Within 1 week</option>
+              <option data-sv="Inom 2 veckor" data-en="Within 2 weeks">Within 2 weeks</option>
+              <option data-sv="Denna månad" data-en="This month">This month</option>
+              <option data-sv="Utforskar alternativ" data-en="Just exploring">Just exploring</option>
+            </select>
+          </div>
+          <button class="form-submit" data-sv="Matcha mig med creators →" data-en="Get Matched with Creators →">Get Matched with Creators →</button>
+        </div>
+      </div>
+
+      <div class="form-card creator">
+        <div class="form-card-header">
+          <h3 data-sv="För creators" data-en="For Creators">For Creators</h3>
+          <p data-sv="Ansök till vårt verifierade creatorsnätverk." data-en="Apply to join our verified creator network.">Apply to join our verified creator network.</p>
+        </div>
+        <div class="form-body">
+          <div class="form-group">
+            <label data-sv="Ditt namn" data-en="Your Name">Your Name</label>
+            <input type="text" data-sv-placeholder="För- och efternamn" data-en-placeholder="First & Last Name" placeholder="First & Last Name" />
+          </div>
+          <div class="form-group">
+            <label data-sv="E-postadress" data-en="Email Address">Email Address</label>
+            <input type="email" data-sv-placeholder="du@mail.com" data-en-placeholder="you@email.com" placeholder="you@email.com" />
+          </div>
+          <div class="form-group">
+            <label data-sv="TikTok, Instagram eller portföljlänk" data-en="TikTok, Instagram or Portfolio Link">TikTok, Instagram or Portfolio Link</label>
+            <input type="url" data-sv-placeholder="https://tiktok.com/@dittnamn" data-en-placeholder="https://tiktok.com/@yourhandle" placeholder="https://tiktok.com/@yourhandle" />
+          </div>
+          <div class="form-group">
+            <label data-sv="Din skönhetsnisch" data-en="Your Beauty Niche">Your Beauty Niche</label>
+            <select>
+              <option value="" data-sv="Välj din nisch..." data-en="Select your niche...">Select your niche...</option>
+              <option data-sv="Hudvård / Anti-aging" data-en="Skincare / Anti-Aging">Skincare / Anti-Aging</option>
+              <option data-sv="Makeup / Färgkosmetik" data-en="Makeup / Color Cosmetics">Makeup / Color Cosmetics</option>
+              <option data-sv="Clean / Naturlig skönhet" data-en="Clean / Natural Beauty">Clean / Natural Beauty</option>
+              <option data-sv="Hårvård" data-en="Haircare">Haircare</option>
+              <option data-sv="Wellness / Kosttillskott" data-en="Wellness / Supplements">Wellness / Supplements</option>
+              <option data-sv="Doft / Parfym" data-en="Fragrance">Fragrance</option>
+            </select>
+          </div>
+          <button class="form-submit" data-sv="Ansök som creator →" data-en="Apply as a Creator →">Apply as a Creator →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3d5af1"/>
+                <stop offset="55%" stop-color="#7b5ea7"/>
+                <stop offset="100%" stop-color="#2ec4f3"/>
+              </linearGradient>
+            </defs>
+            <path d="M50 4 L92 28 L92 72 L50 96 L8 72 L8 28 Z" fill="url(#g2)"/>
+            <path d="M40 33 L70 50 L40 67 Z" fill="white" opacity="0.95"/>
+            <rect x="32" y="33" width="5" height="34" rx="2.5" fill="white" opacity="0.65"/>
+          </svg>
+          <span class="logo-text">Growth<span class="ugc">UGC</span></span>
+        </div>
+        <p data-sv="UGC-byrå för skönhetsmärken. Lanserad i Sverige — expanderar till Europa." data-en="UGC agency for beauty brands. Launched in Sweden — expanding across Europe.">UGC agency for beauty brands. Launched in Sweden — expanding across Europe.</p>
+      </div>
+      <div class="footer-col">
+        <h5 data-sv="Varumärken" data-en="Brands">Brands</h5>
+        <ul>
+          <li data-sv="Hur det fungerar" data-en="How It Works">How It Works</li>
+          <li data-sv="Prissättning" data-en="Pricing">Pricing</li>
+          <li data-sv="Begär innehåll" data-en="Request Content">Request Content</li>
+          <li data-sv="Vanliga frågor" data-en="FAQ">FAQ</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-sv="Creators" data-en="Creators">Creators</h5>
+        <ul>
+          <li data-sv="Ansök nu" data-en="Apply Now">Apply Now</li>
+          <li data-sv="Krav" data-en="Requirements">Requirements</li>
+          <li data-sv="Betalningsinfo" data-en="Payment Info">Payment Info</li>
+          <li data-sv="Vanliga frågor" data-en="FAQ">FAQ</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-sv="Byrån" data-en="Agency">Agency</h5>
+        <ul>
+          <li data-sv="Om oss" data-en="About">About</li>
+          <li data-sv="Integritetspolicy" data-en="Privacy Policy">Privacy Policy</li>
+          <li data-sv="Villkor" data-en="Terms">Terms</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-sv="Kontakt" data-en="Contact">Contact</h5>
+        <ul>
+          <li><a href="mailto:growthugc.se@outlook.com">growthugc.se@outlook.com</a></li>
+          <li><a href="tel:+46762199483">+46 76 219 94 83</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 GrowthUGC. <span data-sv="Alla rättigheter förbehållna." data-en="All rights reserved.">All rights reserved.</span></span>
+      <div class="footer-bottom-right">
+        <span class="footer-dot"></span>
+        <span data-sv="Lanseras i Sverige · Expanderar till Europa" data-en="Launching in Sweden · Expanding across Europe">Launching in Sweden · Expanding across Europe</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById('btn-sv').classList.toggle('active', lang === 'sv');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.querySelectorAll('[data-sv]').forEach(el => {
+      if (el.tagName === 'INPUT' || el.tagName === 'SELECT' || el.tagName === 'BUTTON') return;
+      const val = el.getAttribute('data-' + lang);
+      if (val) el.textContent = val;
+    });
+    document.querySelectorAll('button[data-sv]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val) el.textContent = val;
+    });
+    document.querySelectorAll('select option[data-sv]').forEach(opt => {
+      const val = opt.getAttribute('data-' + lang);
+      if (val) opt.textContent = val;
+    });
+    document.querySelectorAll('input[data-sv-placeholder]').forEach(el => {
+      const val = el.getAttribute('data-' + lang + '-placeholder');
+      if (val) el.placeholder = val;
+    });
+    document.title = lang === 'sv'
+      ? 'GrowthUGC — Vi hjälper dig växa'
+      : 'GrowthUGC — We Help You Grow';
+  }
+  setLang('en');
+</script>
+</body>
+</html>
